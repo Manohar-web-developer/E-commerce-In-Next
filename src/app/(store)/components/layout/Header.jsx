@@ -238,7 +238,9 @@ function Header() {
         </div>
 
         {/* Main Navigation Menu - Desktop Only */}
-        <div className='hidden lg:block w-full pt-4 pb-4 '
+        {/* Added "relative" here so the MegaMenu (which is now "absolute")
+            positions itself against THIS box, not the normal page flow */}
+        <div className='hidden lg:block w-full pt-4 pb-4 relative'
           onMouseLeave={() => setActiveMenu(null)}>
           <nav className="w-[70%] mx-auto flex gap-7 justify-between font-extralight ">
             {menuData.map((v) => (
@@ -261,9 +263,13 @@ function Header() {
               </div>
             ))}
           </nav>
-          {activeMenu && (
-            <MegaMenu activeMenu={activeMenu} />
 
+          {/* Overlay wrapper — absolute + full width, floats ON TOP of the
+              page content below instead of pushing it down */}
+          {activeMenu && (
+            <div className="absolute top-full left-0 w-full z-50 shadow-xl">
+              <MegaMenu activeMenu={activeMenu} />
+            </div>
           )}
         </div>
 
