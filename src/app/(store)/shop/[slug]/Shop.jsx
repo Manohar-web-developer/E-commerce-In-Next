@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react';
 import ProductCard from '../../components/product/ProductCard';
-import { ListFilter, ChevronDown } from 'lucide-react';
+import { ListFilter, ChevronDown, X } from 'lucide-react';
 import axios from 'axios'
 import FilterSidebar from '../../components/layout/FilterSidebar';
 import { useParams } from 'next/navigation';
@@ -12,7 +12,7 @@ function Shop() {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [selected, setSelected] = useState('Most relevant')
   const [sortedProducts, setSortedProducts] = useState([]);
-  const [FilterShow, setFilterShow] = useState(true)
+  const [FilterShow, setFilterShow] = useState(false) // mobile: default closed
   const [FilteredData, setFilteredData] = useState([])
   const [FinalProducts, setFinalProducts] = useState([]);
   const [priceRange, setPriceRange] = useState({
@@ -107,7 +107,15 @@ function Shop() {
       })
   }, [slug])
 
-  
+ 
+  useEffect(() => {
+    if (FilterShow) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [FilterShow])
 
   return (
     <>
@@ -149,16 +157,55 @@ function Shop() {
               )}
             </div>
           </div>
+
           <div className='flex flex-nowrap gap-8'>
+
+            {/* ---------- DESKTOP FILTER (inline, pushes layout) ---------- */}
             <div
-              className={`transition-all duration-300 ease-in-out overflow-hidden ${FilterShow ? 'w-[20%] opacity-100' : 'w-0 opacity-0'
-                }`}
+              className={`hidden md:block transition-all duration-300 ease-in-out overflow-hidden ${
+                FilterShow ? 'w-[20%] opacity-100' : 'w-0 opacity-0'
+              }`}
             >
-              <FilterSidebar Data={apiData} setFilteredData={setFilteredData} setPriceRange={setPriceRange}  maxPrice={maxPrice}
+              <FilterSidebar
+                Data={apiData}
+                setFilteredData={setFilteredData}
+                setPriceRange={setPriceRange}
+                maxPrice={maxPrice}
               />
             </div>
 
-            <div className='grid grid-cols-4 gap-x-5 mt-8 w-full'>
+            {/* ---------- MOBILE FILTER (slide-in drawer) ---------- */}
+            {/* Backdrop */}
+            <div
+              className={`md:hidden fixed inset-0 bg-black/40 z-40 transition-opacity duration-300 ${
+                FilterShow ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+              }`}
+              onClick={() => setFilterShow(false)}
+            />
+
+            {/* Sliding panel */}
+            <div
+              className={`md:hidden fixed top-0 left-0 h-full w-[80%] max-w-[320px] bg-white z-50 shadow-xl transition-transform duration-300 ease-in-out ${
+                FilterShow ? 'translate-x-0' : '-translate-x-full'
+              }`}
+            >
+              <div className='flex justify-between items-center px-4 py-4 border-b border-gray-200'>
+                <span className='font-semibold'>Filter</span>
+                <button onClick={() => setFilterShow(false)}>
+                  <X size={20} />
+                </button>
+              </div>
+              <div className='p-4 overflow-y-auto h-[calc(100%-64px)]'>
+                <FilterSidebar
+                  Data={apiData}
+                  setFilteredData={setFilteredData}
+                  setPriceRange={setPriceRange}
+                  maxPrice={maxPrice}
+                />
+              </div>
+            </div>
+
+            <div className='grid md:grid-cols-4 grid-cols-2 gap-x-5 mt-8 w-full'>
               {FinalProducts.map((item) => (
                 <ProductCard key={item.id} product={item} />
               ))}
