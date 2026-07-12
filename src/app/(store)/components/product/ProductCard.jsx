@@ -57,7 +57,12 @@ function ProductCard({ product }) {
           </div>
 
           <p className="text-black text-[13px]">
-            Save 20% off
+            {Math.round(
+              ((Number(product?.variants?.[0]?.compare_at_price) -
+                Number(product?.variants?.[0]?.price)) /
+                Number(product?.variants?.[0]?.compare_at_price)) *
+              100
+            )}% OFF
           </p>
 
           <p className="text-[#9e5635] text-[13px] font-thin">

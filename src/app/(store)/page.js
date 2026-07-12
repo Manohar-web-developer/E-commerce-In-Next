@@ -3,9 +3,11 @@ import Home from './pages/Home'
 import '../assest/css/style.css'
 
 
+
+
 export const metadata = {
-  title: " All Products",
-  description: "hop our complete range of furniture, home decor, kitchen accessories, and more! Buy now to discover unique pieces that elevate your living space.",
+  title: "Living Shapes: Modern Designs with Indian Craftsmanship",
+  description: "Shop ready-to-ship modern furniture, premium lighting, and home decor accents online. ✓ 40+ years craftsmanship ✓ COD ✓ Fast &amp; Free Delivery",
 };
 export default function page() {
   return (
