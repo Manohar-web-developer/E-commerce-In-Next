@@ -36,7 +36,7 @@ function TrustDataHome() {
     return (
         <>
             <div className='bg-[#3C1D04] w-full'>
-                <div className='w-5/6 mx-auto py-7 grid grid-cols-2 md:grid-cols-6 gap-5'>
+                <div className='w-[90%] md:h-[200px] mx-auto py-7 grid grid-cols-2 md:grid-cols-6 gap-5'>
 
                     {
                         data.map((v, i) => {
