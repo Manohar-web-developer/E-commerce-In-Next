@@ -1,5 +1,6 @@
 "use client";
 import axios from 'axios';
+import Cookies from 'js-cookie'
 import { Star } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -8,6 +9,16 @@ import {
 } from "@/components/ui/accordion"
 import TrustDataHome from '../../components/TrustDataHome';
 import ProductCard from '../../components/product/ProductCard';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+import { useSelector, useDispatch } from 'react-redux'
+import { addToCart } from '../../redux/Cartslice';
 
 function DetailPage() {
   const { slug } = useParams();
@@ -36,28 +47,28 @@ function DetailPage() {
       .catch((err) => {
         console.log(err);
       })
-    
-   
+
+
 
   }, [slug])
   useEffect(() => {
     if (!apiData) return;
-  
+
     axios.get('https://livingshapes.in/collections/all/products.json?limit=250')
       .then((res) => {
         const filtered = res.data.products
-          .filter((item) => 
-            item.product_type?.toLowerCase().trim() === apiData.product_type?.toLowerCase().trim() && 
-            item.id !== apiData.id
+          .filter((item) =>
+            item.product_type == apiData.product_type
           )
           .slice(0, 4);
-  
-        console.log("filtered:", filtered);
-        setRelatedProducts(filtered);   
+
+
+        setRelatedProducts(filtered);
+
       })
       .catch((err) => console.log("Related products error:", err));
   }, [apiData]);
-  
+
 
 
   useEffect(() => {
@@ -143,11 +154,56 @@ function DetailPage() {
         "Your purchase is eligible for return or replacement only if it meets the following conditions: Click Here",
     },
   ]
+ 
+  const dispatch = useDispatch()
+  const handleAddToCart = (product) => {
+    console.log("Product:", product);
+  
+    const existingCart = JSON.parse(
+      Cookies.get("cart") || "[]"
+    );
+  
+    console.log("Existing:", existingCart);
+  
+    const updateCart = [...existingCart, product];
+  
+    console.log("UpdateCart:", updateCart);
+  
+    const stringData = JSON.stringify(updateCart);
+  
+    console.log("Stringify:", stringData);
+  
+    Cookies.set("cart", stringData, {
+      expires: 7,
+    });
+  
+    console.log("Saved:", Cookies.get("cart"));
+  };
+
+  
 
   return (
     <>
       <div className='w-full'>
+        <div className='w-[85%] mx-auto flex items-center pt-7'>
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/">Home</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink href={`/shop/${apiData?.product_type ?.toLowerCase().replace(/\s+/g, "-")}`}>{apiData?.product_type}</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>{apiData?.title}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
         <div className='min-h-0 md:min-h-[700px] w-[95%] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-2 pt-10'>
+
           <div className='md:hidden block'>
 
 
@@ -269,7 +325,7 @@ function DetailPage() {
             </div>
             {/*  Details Page Add To Cart And Buy Button */}
             <div className='pt-5 md:flex gap-4 hidden '>
-              <button className='text-center border border-[#3c1d04] bg-[#FAF7F6] px-15 py-4 cursor-pointer'>Add To Cart</button>
+              <button className='text-center border border-[#3c1d04] bg-[#FAF7F6] px-15 py-4 cursor-pointer'  onClick={() => handleAddToCart(apiData)}>Add To Cart</button>
               <button className='text-center bg-[#3C1D04] text-white uppercase font-extralight px-15 py-4 cursor-pointer'>Buy It Now</button>
             </div>
             {/* Accordion */}
@@ -344,7 +400,7 @@ function DetailPage() {
 
       <div className='fixed bottom-0 border w-screen h-[60px] bg-white md:hidden'>
         <div className='p-3 w-full grid grid-cols-2 gap-4 '>
-          <button className='text-center border border-[#3c1d04] bg-[#FAF7F6] h-full py-1 cursor-pointer'>Add To Cart</button>
+          <button className='text-center border border-[#3c1d04] bg-[#FAF7F6] h-full py-1 cursor-pointer' onClick={() =>handleAddToCart(apiData)}>Add To Cart</button>
           <button className='text-center bg-[#3C1D04] text-white uppercase font-extralight h-full py-2 cursor-pointer'>Buy It Now</button>
         </div>
       </div>

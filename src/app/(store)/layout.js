@@ -1,6 +1,6 @@
-import Footer from "./components/layout/Footer";
-import Header from "./components/layout/Header";
+
 import '../assest/css/style.css'
+import MainLayout from "./MainLayout";
 
 
 
@@ -8,9 +8,10 @@ export default function RootLayout({ children }) {
   return (
     <html>
       <body>
-        <Header/>
-        {children}
-        <Footer />
+       <MainLayout>
+
+       {children}
+       </MainLayout>
       </body>
     </html>
   );

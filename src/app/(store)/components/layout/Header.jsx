@@ -177,7 +177,7 @@ function Header() {
 
   return (
     <>
-      <header className={currentPage === "/" ? "bg-transparent absolute top-0 w-full z-50 " : "z-50  bg-[#3B1E03] text-white w-full relative top-0"}>
+      <header className={currentPage === "/" ? "bg-transparent absolute top-0 w-full z-50 " : "z-999  bg-[#3B1E03] text-white w-full relative top-0"}>
 
         {/* Top Banner */}
         <div className='w-full border-b border-[#7f351a] pt-2'>

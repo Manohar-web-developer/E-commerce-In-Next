@@ -42,7 +42,7 @@ function TrustDataHome() {
                         data.map((v, i) => {
                             return (
                                 <div key={i} className='w-full h-full flex flex-col justify-center items-center gap-5'>
-                                    <Image src={v.Imeges} alt={v.Title} width={34} className='h-1/4' />
+                                    <Image src={v.Imeges} alt={v.Title} width={34}  />
                                     <p className='text-center text-[12px] text-white'>{v.Title}</p>
                                 </div>
                             )
