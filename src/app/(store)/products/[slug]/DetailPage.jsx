@@ -17,8 +17,9 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addToCart } from '../../redux/Cartslice';
+import CartSlide from '../../components/CartSlide';
 
 function DetailPage() {
   const { slug } = useParams();
@@ -154,33 +155,11 @@ function DetailPage() {
         "Your purchase is eligible for return or replacement only if it meets the following conditions: Click Here",
     },
   ]
- 
-  const dispatch = useDispatch()
-  const handleAddToCart = (product) => {
-    console.log("Product:", product);
-  
-    const existingCart = JSON.parse(
-      Cookies.get("cart") || "[]"
-    );
-  
-    console.log("Existing:", existingCart);
-  
-    const updateCart = [...existingCart, product];
-  
-    console.log("UpdateCart:", updateCart);
-  
-    const stringData = JSON.stringify(updateCart);
-  
-    console.log("Stringify:", stringData);
-  
-    Cookies.set("cart", stringData, {
-      expires: 7,
-    });
-  
-    console.log("Saved:", Cookies.get("cart"));
-  };
 
-  
+  const dispatch = useDispatch()
+
+
+
 
   return (
     <>
@@ -193,7 +172,7 @@ function DetailPage() {
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink href={`/shop/${apiData?.product_type ?.toLowerCase().replace(/\s+/g, "-")}`}>{apiData?.product_type}</BreadcrumbLink>
+                <BreadcrumbLink href={`/shop/${apiData?.product_type?.toLowerCase().replace(/\s+/g, "-")}`}>{apiData?.product_type}</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
@@ -325,7 +304,7 @@ function DetailPage() {
             </div>
             {/*  Details Page Add To Cart And Buy Button */}
             <div className='pt-5 md:flex gap-4 hidden '>
-              <button className='text-center border border-[#3c1d04] bg-[#FAF7F6] px-15 py-4 cursor-pointer'  onClick={() => handleAddToCart(apiData)}>Add To Cart</button>
+              <button className='text-center border border-[#3c1d04] bg-[#FAF7F6] px-15 py-4 cursor-pointer' onClick={() => dispatch(addToCart(apiData))}>Add To Cart</button>
               <button className='text-center bg-[#3C1D04] text-white uppercase font-extralight px-15 py-4 cursor-pointer'>Buy It Now</button>
             </div>
             {/* Accordion */}
@@ -400,10 +379,11 @@ function DetailPage() {
 
       <div className='fixed bottom-0 border w-screen h-[60px] bg-white md:hidden'>
         <div className='p-3 w-full grid grid-cols-2 gap-4 '>
-          <button className='text-center border border-[#3c1d04] bg-[#FAF7F6] h-full py-1 cursor-pointer' onClick={() =>handleAddToCart(apiData)}>Add To Cart</button>
+          <button className='text-center border border-[#3c1d04] bg-[#FAF7F6] h-full py-1 cursor-pointer' onClick={() => dispatch(addToCart(apiData))}>Add To Cart</button>
           <button className='text-center bg-[#3C1D04] text-white uppercase font-extralight h-full py-2 cursor-pointer'>Buy It Now</button>
         </div>
       </div>
+      
     </>
   )
 }

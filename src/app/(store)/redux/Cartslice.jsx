@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
+
 const initialState = {
-  cartItems: [1, 2 , 3, 4]
+  cartSideBar: true,
+  cartItems: []
 }
 
 export const CartSlice = createSlice({
@@ -8,13 +10,17 @@ export const CartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (stage, actions)=>{
-        // console.log(actions.payload);
+      stage.cartSideBar = true;
+      console.log("hello")
+
         
+    },
+    toggleCartSideBar: (state) => {
+      state.cartSideBar = !state.cartSideBar;
     }
   },
 })
 
-// Action creators are generated for each case reducer function
-export const { addToCart } = CartSlice.actions
+export const { addToCart, toggleCartSideBar } = CartSlice.actions
 
 export default CartSlice.reducer

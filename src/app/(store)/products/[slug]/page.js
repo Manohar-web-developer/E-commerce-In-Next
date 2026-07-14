@@ -1,5 +1,4 @@
 
-
 import DetailPage from './DetailPage'
 import axios from "axios";
 import * as cheerio from "cheerio";
@@ -11,7 +10,7 @@ export async function generateMetadata({ params }) {
     `https://livingshapes.in/products/${slug}`
   );
 
-  const $ = cheerio.load(data);
+  const $ = await cheerio.load(data);
 
   return {
     title: $("title").text(),

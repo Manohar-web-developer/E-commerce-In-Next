@@ -7,6 +7,8 @@ import { menuData } from '../Data/menuData'
 import MegaMenu from './MegaMenu'
 import FurnitureMenu from './MenuGrid/FurnitureMenu'
 import Image from 'next/image'
+import { useDispatch } from 'react-redux'
+import { toggleCartSideBar } from '../../redux/Cartslice'
 
 // Mobile Menu Component
 function MobileMenu() {
@@ -142,7 +144,7 @@ function MobileMenu() {
 
 // Header Component
 function Header() {
-
+  const dispatch = useDispatch()
   const message = [
     "Stay-In Season Sale",
     "Prepaid orders - Get 5% off with LIVING5",
@@ -177,7 +179,7 @@ function Header() {
 
   return (
     <>
-      <header className={currentPage === "/" ? "bg-transparent absolute top-0 w-full z-50 " : "z-999  bg-[#3B1E03] text-white w-full relative top-0"}>
+      <header className={currentPage === "/" ? "bg-transparent absolute top-0 w-full z-[110] " : "z-[110] bg-[#3B1E03] text-white w-full relative top-0"}>
 
         {/* Top Banner */}
         <div className='w-full border-b border-[#7f351a] pt-2'>
@@ -228,7 +230,7 @@ function Header() {
                 <Search size={18} className='sm:w-5 sm:h-5' />
               </Link>
               <Link href={"/cart"} className='hidden sm:block hover:opacity-70 transition text-white'>
-                <ShoppingCart size={18} className='sm:w-5 sm:h-5' />
+                <ShoppingCart onClick={() => dispatch(toggleCartSideBar())} size={18} className='sm:w-5 sm:h-5' />
               </Link>
 
               {/* Mobile Menu */}

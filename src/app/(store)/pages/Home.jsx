@@ -12,11 +12,10 @@ import PoufUpYourSpace from '../components/PoufUpYourSpace'
 import CustomerLove from '../components/CustomerLove'
 import FaqSection from '../components/FaqSection'
 import WeDeliverTo from '../components/Wedeliverto'
-import Lighting from '../components/layout/MenuGrid/Lighting'
 
 function Home() {
   return (
-    <div>
+    <>
       <Banner />
       <TrustDataHome />
       <MostLovedCat />
@@ -30,7 +29,8 @@ function Home() {
         <FaqSection />
       </div>
       <WeDeliverTo/>
-    </div>
+    </>
+    
   )
 }
 
