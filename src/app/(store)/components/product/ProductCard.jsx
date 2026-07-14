@@ -2,13 +2,11 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../redux/Cartslice';
 
 function ProductCard({ product }) {
-
-  const addToCart = (products) => {
-    console.log(products);
-
-  }
+  const dispatch = useDispatch()
 
   return (
     <div className="w-full cursor-pointer">
@@ -34,7 +32,7 @@ function ProductCard({ product }) {
 
         </Link>
 
-        <button className=" absolute bottom-0 left-0  w-full bg-white  text-black py-3 translate-y-full group-hover:translate-y-0 transition-all cursor-pointer duration-300 " onClick={() => addToCart(product.id)}>
+        <button className=" absolute bottom-0 left-0  w-full bg-white  text-black py-3 translate-y-full group-hover:translate-y-0 transition-all cursor-pointer duration-300 " onClick={()=>dispatch(addToCart(product))}>
           Add To Cart
         </button>
       </div>

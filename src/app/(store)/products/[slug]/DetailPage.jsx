@@ -164,7 +164,7 @@ function DetailPage() {
   return (
     <>
       <div className='w-full'>
-        <div className='w-[85%] mx-auto flex items-center pt-7'>
+        <div className='md:w-[85%] md:mx-auto flex items-center pt-7 ps-7 md:ps-0'>
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
@@ -181,12 +181,9 @@ function DetailPage() {
             </BreadcrumbList>
           </Breadcrumb>
         </div>
-        <div className='min-h-0 md:min-h-[700px] w-[95%] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-2 pt-10'>
+        <div className='min-h-0 md:min-h-[700px] w-[95%] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-2 md:pt-10 pt-5'>
 
-          <div className='md:hidden block'>
-
-
-
+          <div className='md:hidden block ps-5'>
             <div className='pb-3 md:pb-5'>
               <h1 className='text-[17px] sm:text-[20px] capitalize font-semibold font-montserrat'>
                 {apiData?.title}
@@ -332,7 +329,7 @@ function DetailPage() {
               Trending Now
             </h2>
             <hr />
-            <div className='grid grid-cols-4 gap-x-5 mt-8'>
+            <div className='grid md:grid-cols-4 grid-cols-2 gap-x-5 mt-8'>
 
               {relatedProducts.map((item) => (
                 <ProductCard key={item.id} product={item} />

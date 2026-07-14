@@ -229,9 +229,9 @@ function Header() {
               <Link href={"/search"} className='hidden sm:block hover:opacity-70 transition text-white'>
                 <Search size={18} className='sm:w-5 sm:h-5' />
               </Link>
-              <Link href={"/cart"} className='hidden sm:block hover:opacity-70 transition text-white'>
-                <ShoppingCart onClick={() => dispatch(toggleCartSideBar())} size={18} className='sm:w-5 sm:h-5' />
-              </Link>
+              
+                <ShoppingCart onClick={() => dispatch(toggleCartSideBar())} size={18} className='sm:w-5 sm:h-5 hidden sm:block hover:opacity-70 transition text-white cursor-pointer' />
+             
 
               {/* Mobile Menu */}
               <MobileMenu />
