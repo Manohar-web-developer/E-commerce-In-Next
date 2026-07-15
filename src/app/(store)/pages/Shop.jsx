@@ -107,9 +107,6 @@ function Shop({ collection, params }) {
       .then((res) => {
         setapiData(res.data.products);
       })
-      .catch((err) => {
-        console.log(err)
-      })
   }, [activeCollection])
 
   return (

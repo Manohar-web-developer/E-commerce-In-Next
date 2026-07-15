@@ -13,7 +13,7 @@ import CustomerLove from '../components/CustomerLove'
 import FaqSection from '../components/FaqSection'
 import WeDeliverTo from '../components/Wedeliverto'
 
-function Home() {
+function Home({poufsData}) {
   return (
     <>
       <Banner />
@@ -23,7 +23,7 @@ function Home() {
       <IntroNewColl />
       <SeeinStyled />
       <DuelImageBanner img1={CollectionImage} img2={CollectionImage1} />
-      <PoufUpYourSpace />
+      <PoufUpYourSpace poufsData={poufsData}/>
       <div className="grid lg:grid-cols-2">
         <CustomerLove />
         <FaqSection />

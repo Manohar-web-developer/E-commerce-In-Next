@@ -6,20 +6,11 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import ProductCard from "./product/ProductCard";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
-function PoufUpYourSpace() {
+function PoufUpYourSpace({poufsData}) {
 
-    const [Data, setData] = useState([])
 
-    useEffect(() => {
-        axios.get("https://livingshapes.in/collections/poufs/products.json")
-            .then((res) => {
-                setData(res.data.products.slice(0, 10))
-
-            })
-    }, [])
+    
 
     return (
         <section className="w-full py-10 mt-10">
@@ -70,7 +61,7 @@ function PoufUpYourSpace() {
                     }}
                 >
                     
-                        {Data.map((item) => (
+                        {poufsData.map((item) => (
                             <SwiperSlide key={item.id}>
                                 <ProductCard product={item} />
                             </SwiperSlide>

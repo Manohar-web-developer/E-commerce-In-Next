@@ -6,12 +6,12 @@ import { Minus, Plus, ShoppingCart, Trash2, X } from 'lucide-react';
 import Link from 'next/link';
 
 const CartSlide = () => {
-    const cartSlider = useSelector((state) => state.cart.cartSideBar)
-    const CartItem = useSelector((state) => state.cart.cartItems)
-    const dispatch = useDispatch()
-
-    const [shouldRender, setShouldRender] = useState(false)
-    const [animateIn, setAnimateIn] = useState(false)
+    const cartSlider = useSelector((state) => state.cart.cartSideBar);
+    const CartItem = useSelector((state) => state.cart.cartItems);
+    const dispatch = useDispatch();
+    const [shouldRender, setShouldRender] = useState(false);
+    const [animateIn, setAnimateIn] = useState(false);
+    const [apiData, SetapiData] = useState([]);
 
     useEffect(() => {
         if (cartSlider) {
@@ -26,6 +26,7 @@ const CartSlide = () => {
             return () => clearTimeout(timer)
         }
     }, [cartSlider])
+
 
     if (!shouldRender) return null
 
@@ -57,84 +58,87 @@ const CartSlide = () => {
                         CartItem.length == 0 ?
                             (
                                 <div className='pt-10 flex flex-col gap-10 justify-center items-center'>
-                                <div className='font-thin font-montserrat text-3xl'>Your cart is empty.</div>
+                                    <div className='font-thin font-montserrat text-3xl'>Your cart is empty.</div>
 
-                                <div className='flex justify-center items-center shadow-lg rounded-full border-2 h-[200px] w-[200px]'>
-                                    <ShoppingCart size={73} />
+                                    <div className='flex justify-center items-center shadow-lg rounded-full border-2 h-[200px] w-[200px]'>
+                                        <ShoppingCart size={73} />
+                                    </div>
+
+                                    <Link
+                                        href={'/shop/all'}
+                                        className="relative inline-block text-[14px] font-montserrat font-thin group"
+                                        onClick={() => dispatch(toggleCartSideBar())}
+                                    >
+                                        Continue Browsing
+                                        <span className="absolute right-0 -bottom-1 w-full h-[2px] bg-[#3B1D03] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-right" ></span>
+                                    </Link>
                                 </div>
-
-                                <Link
-                                    href={'/shop/all'}
-                                    className="relative inline-block text-[14px] font-montserrat font-thin group"
-                                    onClick={() => dispatch(toggleCartSideBar())}
-                                >
-                                    Continue Browsing
-                                    <span className="absolute right-0 -bottom-1 w-full h-[2px] bg-[#3B1D03] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-right" ></span>
-                                </Link>
-                            </div>
                             )
-                            : 
-                            
-                               (
+                            :
+
+                            (
                                 CartItem.map((item) => {
-                                    
+
                                     return (
                                         <div className="flex gap-4 p-4 border-b" key={item.id}>
-                                    {/* Image */}
-                                    <div className="w-[110px] h-[110px] shrink-0 rounded-md overflow-hidden bg-gray-100">
-                                       <Link href={`/products/}${item.handle}`}>
-                                        <img
-                                            src={item.image?.src}
-                                            alt={item.title}
-                                            className="w-full h-full object-cover"
-                                        /></Link>
-                                    </div>
-    
-                                    {/* Details */}
-                                    <div className="flex-1 flex flex-col gap-2">
-                                        {/* Title + Delete */}
-                                        <div className="flex justify-between items-start gap-3">
-                                            <h3 className="font-medium text-[17px] leading-snug">
-                                               {item.title}
-                                            </h3>
-                                            <button className="shrink-0 hover:opacity-70 transition cursor-pointer" onClick={() => dispatch(removeCart(item.id))}>
-                                                <Trash2 size={20} />
-                                            </button>
+                                            {/* Image */}
+                                            <div className="w-[110px] h-[110px] shrink-0 rounded-md overflow-hidden bg-gray-100">
+                                                <Link href={`/products/}${item.handle}`}>
+                                                    <img
+                                                        src={item.image?.src}
+                                                        alt={item.title}
+                                                        className="w-full h-full object-cover"
+                                                    /></Link>
+                                            </div>
+
+                                            {/* Details */}
+                                            <div className="flex-1 flex flex-col gap-2">
+                                                {/* Title + Delete */}
+                                                <div className="flex justify-between items-start gap-3">
+                                                    <h3 className="font-medium text-[17px] leading-snug">
+                                                        {item.title}
+                                                    </h3>
+                                                    <button className="shrink-0 hover:opacity-70 transition cursor-pointer" onClick={() => dispatch(removeCart(item.id))}>
+                                                        <Trash2 size={20} />
+                                                    </button>
+                                                </div>
+
+                                                {/* Price */}
+                                                <div className="flex items-center gap-3">
+                                                    <span className="text-gray-400 line-through text-[15px]">
+                                                        Rs. {Number(item.compare_at_price).toLocaleString('en-IN')}
+                                                    </span>
+                                                    <span className="text-[#c07a3e] font-medium text-[15px]">
+                                                        Rs. {Number(item.price).toLocaleString('en-IN')}
+                                                    </span>
+                                                </div>
+
+                                                {/* Discount text */}
+                                                <p className="text-gray-500 text-sm">
+                                                    You are getting Rs. {Number(item.compare_at_price - item.price).toLocaleString('en-IN')} off per item
+                                                </p>
+
+                                                {/* Quantity Stepper */}
+                                                <div className="flex items-center border rounded-md w-fit mt-1">
+                                                    <button className="w-10 h-10 flex items-center justify-center hover:bg-gray-50 transition cursor-pointer" onClick={() => dispatch(decreaseQuantity(item.id))}>
+                                                        <Minus size={16} />
+                                                    </button>
+                                                    <span className="w-10 text-center text-[15px]">{item.Quantity}</span>
+                                                    <button className="w-10 h-10 flex items-center justify-center hover:bg-gray-50 transition cursor-pointer" onClick={() => dispatch(increaseQuantity(item.id))}>
+                                                        <Plus size={16} />
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
-    
-                                        {/* Price */}
-                                        <div className="flex items-center gap-3">
-                                            <span className="text-gray-400 line-through text-[15px]">
-                                            Rs. {Number(item.compare_at_price).toLocaleString('en-IN')}
-                                            </span>
-                                            <span className="text-[#c07a3e] font-medium text-[15px]">
-                                                Rs. {Number(item.price).toLocaleString('en-IN')}
-                                            </span>
-                                        </div>
-    
-                                        {/* Discount text */}
-                                        <p className="text-gray-500 text-sm">
-                                            You are getting Rs. {Number(item.compare_at_price - item.price).toLocaleString('en-IN')} off per item
-                                        </p>
-    
-                                        {/* Quantity Stepper */}
-                                        <div className="flex items-center border rounded-md w-fit mt-1">
-                                            <button className="w-10 h-10 flex items-center justify-center hover:bg-gray-50 transition cursor-pointer" onClick={() => dispatch(decreaseQuantity(item.id))}>
-                                                <Minus size={16} />
-                                            </button>
-                                            <span className="w-10 text-center text-[15px]">{item.Quantity}</span>
-                                            <button className="w-10 h-10 flex items-center justify-center hover:bg-gray-50 transition cursor-pointer" onClick={() => dispatch(increaseQuantity(item.id))}>
-                                                <Plus size={16} />
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
                                     )
-                                    
+
                                 })
-                            
-                               )
+
+                            )
                     }
+                    <div className='border p-7 h-[300px]'>
+
+                    </div>
                 </div>
 
                 {/* Footer */}

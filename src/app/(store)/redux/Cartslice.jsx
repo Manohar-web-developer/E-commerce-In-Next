@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import Cookies from 'js-cookie'
 
-// Cookie se initial cart load karo (safe parsing ke saath)
 const getCartFromCookie = () => {
   const rawCart = Cookies.get("cart")
   try {

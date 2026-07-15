@@ -1,8 +1,9 @@
 import React from 'react'
+import Cart from './Cart'
 
 function page() {
   return (
-    <div>Cart page</div>
+    <Cart/>
   )
 }
 

@@ -1,25 +1,15 @@
 "use client";
 import axios from 'axios';
-import Cookies from 'js-cookie'
-import { Star } from 'lucide-react';
+import { Heart, Star } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import {
-  Accordion, AccordionContent, AccordionItem, AccordionTrigger,
-} from "@/components/ui/accordion"
+import {Accordion, AccordionContent, AccordionItem, AccordionTrigger,} from "@/components/ui/accordion"
 import TrustDataHome from '../../components/TrustDataHome';
 import ProductCard from '../../components/product/ProductCard';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { useDispatch } from 'react-redux'
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator, } from "@/components/ui/breadcrumb"
+import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '../../redux/Cartslice';
-import CartSlide from '../../components/CartSlide';
+import { addToWishList } from '../../redux/WishList';
 
 function DetailPage() {
   const { slug } = useParams();
@@ -38,7 +28,6 @@ function DetailPage() {
       SetQty((prev) => prev - 1)
     }
   }
-
   useEffect(() => {
     axios.get(`https://livingshapes.in/products/${slug}.json`)
       .then((res) => {
@@ -48,9 +37,6 @@ function DetailPage() {
       .catch((err) => {
         console.log(err);
       })
-
-
-
   }, [slug])
   useEffect(() => {
     if (!apiData) return;
@@ -69,8 +55,6 @@ function DetailPage() {
       })
       .catch((err) => console.log("Related products error:", err));
   }, [apiData]);
-
-
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -156,7 +140,11 @@ function DetailPage() {
     },
   ]
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const wishList = useSelector((state) => state.WishList.wishList);
+
+  console.log(wishList);
+  
 
 
 
@@ -239,9 +227,11 @@ function DetailPage() {
 
             {/* Main image */}
             <div
-              className='w-full h-[280px] sm:h-[420px] md:h-[658px] cursor-zoom-in border border-gray-300'
+              className='w-full h-[280px] sm:h-[420px] md:h-[658px] relative cursor-zoom-in border border-gray-300'
               onClick={() => setOpenGallery(true)}
             >
+              
+              <Heart className='absolute top-6 right-6 text-[#A45B38] cursor-pointer fill-[#A45B38]' onClick={() => dispatch(addToWishList(apiData))} size={32}/>
               <img src={displayImage} alt="" className="w-full h-full object-cover" />
             </div>
           </div>
@@ -340,10 +330,10 @@ function DetailPage() {
       </div>
 
       {/* Fullscreen gallery */}
-      <div>
+      <div >
         {openGallery && (
           <div
-            className="fixed inset-0 bg-white w-screen h-screen z-50 flex items-center justify-center px-4"
+            className="fixed inset-0 bg-white w-screen h-screen z-99999 flex items-center justify-center px-4"
             onClick={() => setOpenGallery(false)}
           >
             {/* Prev button: bottom on mobile, side on desktop */}
