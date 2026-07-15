@@ -11,7 +11,6 @@ const CartSlide = () => {
     const dispatch = useDispatch();
     const [shouldRender, setShouldRender] = useState(false);
     const [animateIn, setAnimateIn] = useState(false);
-    const [apiData, SetapiData] = useState([]);
 
     useEffect(() => {
         if (cartSlider) {

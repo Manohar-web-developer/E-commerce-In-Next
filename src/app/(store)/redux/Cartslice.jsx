@@ -34,8 +34,8 @@ export const CartSlice = createSlice({
             null,
           title: product.title,
           handle: product.handle,
-          compare_at_price: product.variants[0].compare_at_price,
-          price: product.variants[0].price,
+          compare_at_price: product.variants?.[0]?.compare_at_price || product.compare_at_price || null,
+          price: product.variants?.[0]?.price || product?.price,
           Quantity: 1
         }
 

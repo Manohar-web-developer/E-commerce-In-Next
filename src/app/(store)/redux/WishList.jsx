@@ -13,6 +13,7 @@ const getWishListData = () => {
 }
 
 const initialState = {
+  popup: false,
   wishList: getWishListData(),
 }
 
@@ -21,29 +22,36 @@ export const WishList = createSlice({
   initialState,
   reducers: {
     addToWishList: (state, action) => {
-        const data = action.payload;
+        const product = action.payload;
 
-        const checkWishlist = state.wishList.filter((v) => v.id === data.id)
+        const checkWishlist = state.wishList.filter((v) => v.id === product.id)
 
         if(checkWishlist.length == 0){
             let wishShowData = {
-                id: data.id,
-                image: data.image,
-                price: data.price
+                id: product.id,
+                image: product.image ||
+                  product.images?.[0] ||
+                  null,
+                title: product.title,
+                handle: product.handle,
+                compare_at_price: product.variants[0].compare_at_price,
+                price: product.variants[0].price,
+                Quantity: 1
             }
             state.wishList = [wishShowData, ...state.wishList]
             Cookies.set("wishlist", JSON.stringify(state.wishList))
         }else{
-            const removeWishList = state.wishList.filter((v) => v.id !== data.id)
+            const removeWishList = state.wishList.filter((v) => v.id !== product.id)
             state.wishList = [...removeWishList]
             Cookies.set("wishlist", JSON.stringify(state.wishList))
         }
        
-    }
+    },
+    togglePopup: (state) => {
+        state.popup = !state.popup
+      }
   },
 })
-
-// Action creators are generated for each case reducer function
-export const { addToWishList } = WishList.actions
+export const { addToWishList, togglePopup } = WishList.actions
 
 export default WishList.reducer

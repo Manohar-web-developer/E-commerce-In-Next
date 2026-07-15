@@ -143,7 +143,7 @@ function DetailPage() {
   const dispatch = useDispatch();
   const wishList = useSelector((state) => state.WishList.wishList);
 
-  console.log(wishList);
+  const isWishlisted = wishList.some((v) => v.id == apiData?.id)
   
 
 
@@ -231,7 +231,10 @@ function DetailPage() {
               onClick={() => setOpenGallery(true)}
             >
               
-              <Heart className='absolute top-6 right-6 text-[#A45B38] cursor-pointer fill-[#A45B38]' onClick={() => dispatch(addToWishList(apiData))} size={32}/>
+              <Heart className={isWishlisted ? 'absolute top-6 right-6 text-[#A45B38] cursor-pointer fill-[#A45B38]' : 'absolute top-6 right-6 text-[#A45B38] cursor-pointer'} onClick={(e) => {
+                e.stopPropagation()
+                dispatch(addToWishList(apiData))
+                }} size={32}/>
               <img src={displayImage} alt="" className="w-full h-full object-cover" />
             </div>
           </div>

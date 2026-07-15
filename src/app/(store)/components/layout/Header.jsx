@@ -9,6 +9,7 @@ import FurnitureMenu from './MenuGrid/FurnitureMenu'
 import Image from 'next/image'
 import { useDispatch } from 'react-redux'
 import { toggleCartSideBar } from '../../redux/Cartslice'
+import { togglePopup } from '../../redux/WishList'
 
 // Mobile Menu Component
 function MobileMenu() {
@@ -220,9 +221,9 @@ function Header() {
 
             {/* Right Icons */}
             <div className='flex justify-center gap-4 lg:gap-6'>
-              <Link href={"/wishlist"} className='hidden sm:block hover:opacity-70 transition text-white'>
-                <Heart size={18} className='sm:w-5 sm:h-5' />
-              </Link>
+              
+                <Heart size={18} className='sm:w-5 sm:h-5 hidden sm:block hover:opacity-70 text-white cursor-pointer' onClick={() => dispatch(togglePopup())} />
+              
               <Link href={"/account"} className='hidden sm:block hover:opacity-70 transition text-white'>
                 <User size={18} className='sm:w-5 sm:h-5' />
               </Link>
