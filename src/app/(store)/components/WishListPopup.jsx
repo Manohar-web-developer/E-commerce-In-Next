@@ -37,6 +37,7 @@ function WishListPopup() {
                             :
                             (
 
+                                <div className="h-[800px] overflow-y-auto pr-2">
                                 <div className="grid gap-6 md:grid-cols-3">
                                     {wishList.map((item, idx) => (
                                         <div
@@ -51,7 +52,7 @@ function WishListPopup() {
                                                     {item.title}
                                                 </div>
                                             </div>
-
+                            
                                             <div className="w-full h-72 bg-gray-50 flex items-center justify-center overflow-hidden">
                                                 <img
                                                     src={item.image.src}
@@ -59,16 +60,16 @@ function WishListPopup() {
                                                     className="w-full h-full object-cover"
                                                 />
                                             </div>
-
+                            
                                             <div className="px-6 pt-6 pb-4 text-center">
                                                 <span className="text-lg font-bold text-gray-900">
                                                     ₹{Number(item.price).toLocaleString("en-IN")}
                                                 </span>
                                             </div>
-
+                            
                                             <div className="px-6 pb-6 flex items-center gap-4">
                                                 <button
-                                                    className="flex-1 bg-[#a56b47] hover:bg-[#8f5c3c] active:scale-[0.98] transition text-white text-[12px] px-2 font-semibold tracking-wide py-4 rounded-lg"
+                                                    className="flex-1 bg-[#a56b47] hover:bg-[#8f5c3c] active:scale-[0.98] transition text-white text-[12px] px-2 font-semibold tracking-wide py-4 rounded-lg cursor-pointer"
                                                     onClick={() => dispatch(addToCart(item))}
                                                 >
                                                     ADD TO CART
@@ -83,6 +84,7 @@ function WishListPopup() {
                                         </div>
                                     ))}
                                 </div>
+                            </div>
                             )
 
                     }
