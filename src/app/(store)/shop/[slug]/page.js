@@ -7,7 +7,7 @@ import * as cheerio from "cheerio";
 export async function generateMetadata({ params }) {
   const { slug } = await params;
 
-  const { data } = await axios.get(
+  const data = axios.get(
     `https://livingshapes.in/collections/${slug}`
   );
 

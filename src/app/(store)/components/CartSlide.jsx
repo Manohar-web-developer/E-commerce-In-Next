@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { decreaseQuantity, increaseQuantity, removeCart, toggleCartSideBar } from '../redux/Cartslice';
 import { Minus, Plus, ShoppingCart, Trash2, X } from 'lucide-react';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 const CartSlide = () => {
     const cartSlider = useSelector((state) => state.cart.cartSideBar);
@@ -12,6 +13,9 @@ const CartSlide = () => {
     const [shouldRender, setShouldRender] = useState(false);
     const [animateIn, setAnimateIn] = useState(false);
 
+    let Checkout = () => {
+        redirect('/checkout')
+    }
     useEffect(() => {
         if (cartSlider) {
             setShouldRender(true)
@@ -29,6 +33,7 @@ const CartSlide = () => {
 
     if (!shouldRender) return null
 
+ 
 
 
     return (
@@ -82,7 +87,7 @@ const CartSlide = () => {
                                         <div className="flex gap-4 p-4 border-b" key={item.id}>
                                             {/* Image */}
                                             <div className="w-[110px] h-[110px] shrink-0 rounded-md overflow-hidden bg-gray-100">
-                                                <Link href={`/products/}${item.handle}`}>
+                                            <Link href={`/products/${item.handle}`}>
                                                     <img
                                                         src={item.image?.src}
                                                         alt={item.title}
@@ -135,16 +140,19 @@ const CartSlide = () => {
 
                             )
                     }
-                    <div className='border p-7 h-[300px]'>
+                    {/* <div className='border p-7 h-[300px]'>
 
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Footer */}
                 {
                     CartItem.length == 0 ? ""
                         :
-                        <div className="p-5 border-t shrink-0 bg-[#3C1D04] text-center text-white uppercase text-[13px] font-thin font-montserrat tracking-widest">
+                        <div className="p-5 border-t shrink-0 bg-[#3C1D04] text-center text-white uppercase text-[13px] font-thin font-montserrat tracking-widest cursor-pointer" onClick={() => {
+                            dispatch(toggleCartSideBar());
+                            Checkout();
+                            }}>
                             Check out . RS. {Number(CartItem.reduce((acc, curr) => {
                                 return acc + (curr.Quantity * curr.price)
                             }, 0)).toLocaleString('en-IN')} INR

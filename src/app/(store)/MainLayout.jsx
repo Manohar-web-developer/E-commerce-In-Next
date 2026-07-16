@@ -6,17 +6,17 @@ import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import CartSlide from './components/CartSlide';
 import WishListPopup from './components/WishListPopup';
-function MainLayout({children}) {
+function MainLayout({ children }) {
   return (
     <>
-    <Provider store={store}>
-      <WishListPopup/>
-    <CartSlide/>
-    <Header/>
-    {children}
-    <Footer/>
-    </Provider>
-   
+      <Provider store={store}>
+        <WishListPopup />
+        <CartSlide />
+        <Header />
+        {children}
+        <Footer />
+      </Provider>
+
     </>
   )
 }
