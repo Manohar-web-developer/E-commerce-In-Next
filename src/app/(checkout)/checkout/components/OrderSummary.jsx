@@ -33,7 +33,7 @@ function OrderSummary() {
     const applyCoupan = () => {
 
         const matchCupon = discountCodes.find(
-            (code) => code.code === CodeValue
+            (code) => code.code.toLowerCase() === CodeValue.toLowerCase()
         );
 
         if (!matchCupon) {

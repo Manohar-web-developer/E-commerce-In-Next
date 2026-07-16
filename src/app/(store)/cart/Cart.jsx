@@ -4,8 +4,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Minus, Plus, ShoppingCart, Trash2 } from 'lucide-react'
 import Link from 'next/link'
 import { decreaseQuantity, increaseQuantity, removeCart } from '../redux/Cartslice';
+import { useRouter } from 'next/navigation';
 
 const Cart = () => {
+  const router = useRouter()
+
     const CartItem = useSelector((state) => state.cart.cartItems)
     const dispatch = useDispatch()
 
@@ -166,7 +169,7 @@ const Cart = () => {
                         <span>Rs. {Number(subtotal).toLocaleString('en-IN')}</span>
                     </div>
 
-                    <button className="mt-2 w-full py-4 bg-[#3C1D04] text-white uppercase text-[13px] font-thin font-montserrat tracking-widest hover:bg-[#2c1503] transition-colors cursor-pointer">
+                    <button className="mt-2 w-full py-4 bg-[#3C1D04] text-white uppercase text-[13px] font-thin font-montserrat tracking-widest hover:bg-[#2c1503] transition-colors cursor-pointer" onClick={()=> router.push('/checkout')}>
                         Checkout
                     </button>
 
