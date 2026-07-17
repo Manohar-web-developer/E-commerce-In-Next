@@ -3,21 +3,19 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Field, FieldDescription, FieldGroup, FieldLabel, } from "@/components/ui/field"
 import { InputGroup, InputGroupAddon, InputGroupInput, } from "@/components/ui/input-group"
 import { ArrowRight, ChevronLeft, Mail, Phone } from "lucide-react"
-import { redirect } from "next/dist/server/api-utils"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
-function Information({setStep}) {
+function Information({setStep,setdata, data}) {
   const router = useRouter()
 
   const [error, setError] = useState([])
 
   const [formData, setFormData] = useState({
-    email: '',
-    firstName: '',
-    lastName: '',
-    phone: ''
-
+    email: data?.info?.email || '',
+    firstName: data?.info?.firstName || '',
+    lastName: data?.info?.lastName || '',
+    phone: data?.info?.phone || ''
   })
   const submitForm = (e) => {
     const newError = [];
@@ -35,6 +33,9 @@ function Information({setStep}) {
     if(newError.length > 0){
       return
     }
+
+    setdata(prev => ({...prev, info : formData}))
+
     setStep(2)
   }
   const removeError = (field, value) => {

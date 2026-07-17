@@ -1,6 +1,7 @@
 
 import '../../assest/css/style.css'
-import MainLayout from "./MainLayout";
+import MainLayout from "./MainLayout"; import ParentRoot from './ParentRoot';
+;
 
 
 
@@ -8,10 +9,12 @@ export default function RootLayout({ children }) {
   return (
     <html>
       <body>
-       <MainLayout>
 
-       {children}
-       </MainLayout>
+      
+
+          <ParentRoot>
+            {children}
+          </ParentRoot>
       </body>
     </html>
   );

@@ -3,20 +3,21 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from "@/components/ui/select";
 import { ArrowRight, ChevronLeft } from "lucide-react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-export default function Shipping({ setStep }) {
+export default function Shipping({ setStep, setdata, data }) {
   const [formData, setFormData] = useState({
-    fullName: "",
-    address: "",
-    apartment: "",
-    city: "",
-    pin: "",
-    phone: "",
-    state: "",
-    country: ""
+    fullName: data?.shipping?.fullName || '',
+    address: data?.shipping?.address || '',
+    apartment: data?.shipping?.apartment || '',
+    city: data?.shipping?.city || '',
+    pin: data?.shipping?.pin || '',
+    phone: data?.shipping?.phone || '',
+    state: data?.shipping?.state || '',
+    country: data?.shipping?.country || ''
   })
   const [errors, setErrors] = useState({})
-
+  const router = useRouter()
   const submitForm = (e) => {
     e.preventDefault()
     const newErrors = {};
@@ -48,6 +49,7 @@ export default function Shipping({ setStep }) {
     }
     setErrors(newErrors)
     if (Object.keys(newErrors).length === 0) {
+      setdata(prev => ({ ...prev, shipping: formData }))
       setStep(3)
     }
   }
@@ -222,7 +224,7 @@ export default function Shipping({ setStep }) {
 
       {/* Footer actions */}
       <div className="w-full flex items-center justify-between pt-5">
-        <div className="flex items-center gap-2 text-[#5c2707] cursor-pointer">
+        <div className="flex items-center gap-2 text-[#5c2707] cursor-pointer" onClick={()=> router.push('/cart')}>
           <ChevronLeft size={16} />
           Return to Cart
         </div>

@@ -7,8 +7,8 @@ const steps = [
   { id: 4, title: "Review" },
 ];
 
-const CheckoutSteps = ({ currentStep }) => {
-  
+const CheckoutSteps = ({ currentStep, setStep }) => {   // 👈 setStep prop add kiya
+
   return (
     <div className="w-full max-w-3xl mx-auto px-4 py-6">
       <div className="flex items-center">
@@ -21,13 +21,16 @@ const CheckoutSteps = ({ currentStep }) => {
           return (
             <React.Fragment key={step.id}>
               {/* Step circle + label */}
-              <div className="flex flex-col items-center flex-shrink-0">
+              <div className="flex flex-col items-center shrink-0">
                 <div
+                  onClick={() => {
+                    if (isCompleted) setStep(step.id)   // 👈 sirf completed step pe click chalega
+                  }}
                   className={`flex items-center justify-center w-9 h-9 sm:w-11 sm:h-11 rounded-full border-2 font-semibold text-sm sm:text-base transition-all duration-500 ease-in-out
-                    ${
-                      isDone
-                        ? "bg-[#602A0B] border-[#602A0B] text-white"
-                        : "bg-white border-gray-300 text-gray-400"
+                  ${isCompleted ? "cursor-pointer" : "cursor-default"}
+                  ${isDone
+                      ? "bg-[#602A0B] border-[#602A0B] text-white"
+                      : "bg-white border-gray-300 text-gray-400"
                     }`}
                 >
                   {isCompleted ? (
@@ -50,7 +53,7 @@ const CheckoutSteps = ({ currentStep }) => {
                 </div>
                 <span
                   className={`mt-2 text-xs sm:text-sm font-medium text-center transition-colors duration-500 ease-in-out
-                    ${isDone ? "text-[#602A0B]" : "text-gray-400"}`}
+                  ${isDone ? "text-[#602A0B]" : "text-gray-400"}`}
                 >
                   {step.title}
                 </span>
@@ -61,7 +64,7 @@ const CheckoutSteps = ({ currentStep }) => {
                 <div className="flex-1 h-0.5 mx-1 sm:mx-2 mb-5 sm:mb-6 relative bg-gray-200 overflow-hidden rounded">
                   <div
                     className={`absolute top-0 left-0 h-full bg-[#602A0B] transition-all duration-500 ease-in-out
-                      ${isCompleted ? "w-full" : "w-0"}`}
+                    ${isCompleted ? "w-full" : "w-0"}`}
                   />
                 </div>
               )}
