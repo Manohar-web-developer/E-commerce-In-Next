@@ -1,17 +1,13 @@
-
-import '../assest/css/style.css'
+import "../assest/css/style.css";
 import MainLayout from "./MainLayout";
-
-
 
 export default function RootLayout({ children }) {
   return (
-    <html>
+    <html lang="en" suppressHydrationWarning>
       <body>
-       <MainLayout>
-
-       {children}
-       </MainLayout>
+          <MainLayout>
+            {children}
+          </MainLayout>
       </body>
     </html>
   );
