@@ -1,4 +1,3 @@
-
 import { Checkbox } from "@/components/ui/checkbox"
 import { Field, FieldDescription, FieldGroup, FieldLabel, } from "@/components/ui/field"
 import { InputGroup, InputGroupAddon, InputGroupInput, } from "@/components/ui/input-group"
@@ -56,10 +55,10 @@ function Information({setStep,setdata, data}) {
   }
   return (
     <>
-      <div className=" w-full max-w-3xl mx-auto px-4 py-6 border">
-        <div className='flex items-center justify-between '>
+      <div className=" w-full max-w-3xl mx-auto px-4 sm:px-6 py-6 border">
+        <div className='flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-0'>
           <h3>Contact Information </h3>
-          <p className='pe-3 text-gray-400 text-sm'>Already Have an account? <span className='text-[#5C2707] cursor-pointer'>Log in</span></p>
+          <p className='sm:pe-3 text-gray-400 text-sm'>Already Have an account? <span className='text-[#5C2707] cursor-pointer'>Log in</span></p>
         </div>
         <div className="flex flex-col gap-5">
           <Field className="w-full pt-5">
@@ -80,7 +79,7 @@ function Information({setStep,setdata, data}) {
               error.includes("mail") ? <FieldDescription className='text-red-500'>Email Required</FieldDescription> : ''
             }
           </Field>
-          <FieldGroup className="grid md:grid-cols-2 gap-5">
+          <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <Field className="w-full">
               <FieldLabel htmlFor="inline-start-input">First Name</FieldLabel>
               <InputGroup>
@@ -139,19 +138,19 @@ function Information({setStep,setdata, data}) {
           <FieldGroup className="w-full">
             <Field orientation="horizontal">
               <Checkbox id="terms-checkbox-basic" name="terms-checkbox-basic" />
-              <FieldLabel htmlFor="terms-checkbox-basic">
+              <FieldLabel htmlFor="terms-checkbox-basic" className="text-sm">
                 Keep me up to date on news and exclusive offers
               </FieldLabel>
             </Field>
           </FieldGroup>
         </div>
-        <div className="w-full flex items-center justify-between pt-5">
-          <div className="flex items-center gap-2 text-[#5c2707] cursor-pointer" onClick={() => router.push('/cart')}>
+        <div className="w-full flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-5">
+          <div className="flex items-center justify-center sm:justify-start gap-2 text-[#5c2707] cursor-pointer text-sm" onClick={() => router.push('/cart')}>
             <ChevronLeft size={16} />
             Return to Cart
           </div>
-          <div>
-            <button className="flex items-center gap-2 bg-[#5c2707] text-white font-thin font-montserrat px-6 py-3 rounded-lg cursor-pointer" type="submit" onClick={() => submitForm()}>
+          <div className="w-full sm:w-auto">
+            <button className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#5c2707] text-white font-thin font-montserrat px-6 py-3 rounded-lg cursor-pointer" type="submit" onClick={() => submitForm()}>
               Continue to Shipping <ArrowRight size={16} />
             </button>
           </div>

@@ -27,7 +27,7 @@ function Payment({ setStep, setdata , data }) {
 
   return (
     <>
-      <div className='w-full max-w-3xl mx-auto space-y-4 rounded-lg border p-6'>
+      <div className='w-full max-w-3xl mx-auto space-y-4 rounded-lg border p-4 sm:p-6'>
         <div>
           <h2 className='font-bold'>Payment Method </h2>
           <p className='text-[13px] font-montserrat text-gray-400 pt-2'>All Transactions are secure and encrypted.</p>
@@ -40,8 +40,8 @@ function Payment({ setStep, setdata , data }) {
             defultvalue={'plus'}
           >
             <FieldLabel htmlFor="plus-plan">
-              <Field orientation="horizontal" className='flex w-full items-end justify-between'>
-                <RadioGroupItem value="plus" id="plus-plan" />
+              <Field orientation="horizontal" className='flex w-full items-start sm:items-end justify-between gap-3'>
+                <RadioGroupItem value="plus" id="plus-plan" className="mt-1 sm:mt-0 shrink-0" />
                 <FieldContent>
                   <FieldTitle>Cash on delivery</FieldTitle>
                   <FieldDescription>
@@ -51,8 +51,8 @@ function Payment({ setStep, setdata , data }) {
               </Field>
             </FieldLabel>
             <FieldLabel htmlFor="pro-plan">
-              <Field orientation="horizontal">
-                <RadioGroupItem value="pro" id="pro-plan" />
+              <Field orientation="horizontal" className="items-start sm:items-end gap-3">
+                <RadioGroupItem value="pro" id="pro-plan" className="mt-1 sm:mt-0 shrink-0" />
                 <FieldContent>
                   <FieldTitle>Bank Transfer</FieldTitle>
                   <FieldDescription>Transfer directly from your bank account.</FieldDescription>
@@ -60,8 +60,8 @@ function Payment({ setStep, setdata , data }) {
               </Field>
             </FieldLabel>
             <FieldLabel htmlFor="enterprise-plan">
-              <Field orientation="horizontal">
-                <RadioGroupItem value="enterprise" id="enterprise-plan" />
+              <Field orientation="horizontal" className="items-start sm:items-end gap-3">
+                <RadioGroupItem value="enterprise" id="enterprise-plan" className="mt-1 sm:mt-0 shrink-0" />
                 <FieldContent>
                   <FieldTitle>UPI</FieldTitle>
                   <FieldDescription>
@@ -72,14 +72,14 @@ function Payment({ setStep, setdata , data }) {
             </FieldLabel>
           </RadioGroup>
         </div>
-        <div className="w-full flex items-center justify-between pt-5">
-          <div className="flex items-center gap-2 text-[#5c2707] cursor-pointer" onClick={() => router.push('/cart')}>
+        <div className="w-full flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-5">
+          <div className="flex items-center justify-center sm:justify-start gap-2 text-[#5c2707] cursor-pointer text-sm" onClick={() => router.push('/cart')}>
             <ChevronLeft size={16} />
             Return to Cart
           </div>
-          <div>
+          <div className="w-full sm:w-auto">
             <button
-              className="flex items-center gap-2 bg-[#5c2707] text-white font-thin font-montserrat px-6 py-3 rounded-lg cursor-pointer"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#5c2707] text-white font-thin font-montserrat px-6 py-3 rounded-lg cursor-pointer"
               type="submit"
               onClick={() => setStep(4)}
             >

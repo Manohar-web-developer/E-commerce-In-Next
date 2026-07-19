@@ -200,11 +200,28 @@ function Header() {
         <div className="py-5 w-full border-b border-[#7f351a]">
           <div className='w-[90%] mx-auto flex justify-between items-center gap-4'>
 
-            {/* Left Links - Hidden on mobile */}
-            <div className='hidden lg:flex justify-center gap-6 text-sm'>
-              <Link href={"/"} className='hover:opacity-70 transition text-white'>Our Story</Link>
-              <Link href={"/"} className='hover:opacity-70 transition text-white'>Bulk Queries</Link>
-              <Link href={"/"} className='hover:opacity-70 transition text-white'>Inspiration</Link>
+            {/* Left Section: Search + Cart icons on mobile, text links on desktop */}
+            <div className='flex items-center gap-4 lg:gap-6 text-sm'>
+              {/* Mobile only: Search + Cart */}
+              <div className='flex lg:hidden items-center gap-4'>
+                <Search
+                  size={20}
+                  className='hover:opacity-70 transition text-white cursor-pointer'
+                  onClick={() => dispatch(serchBoxPopup())}
+                />
+                <ShoppingCart
+                  size={20}
+                  className='hover:opacity-70 transition text-white cursor-pointer'
+                  onClick={() => dispatch(toggleCartSideBar())}
+                />
+              </div>
+
+              {/* Desktop only: Our Story / Bulk Queries / Inspiration */}
+              <div className='hidden lg:flex gap-6'>
+                <Link href={"/"} className='hover:opacity-70 transition text-white'>Our Story</Link>
+                <Link href={"/"} className='hover:opacity-70 transition text-white'>Bulk Queries</Link>
+                <Link href={"/"} className='hover:opacity-70 transition text-white'>Inspiration</Link>
+              </div>
             </div>
 
             {/* Logo */}

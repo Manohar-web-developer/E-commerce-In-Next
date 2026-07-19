@@ -67,7 +67,7 @@ export default function Shipping({ setStep, setdata, data }) {
 
   }
   return (
-    <form className="w-full max-w-3xl mx-auto space-y-4 rounded-lg border p-6" onSubmit={submitForm}>
+    <form className="w-full max-w-3xl mx-auto space-y-4 rounded-lg border p-4 sm:p-6" onSubmit={submitForm}>
       {/* Country / Region */}
       <div className="space-y-1.5 w-full">
         <Label htmlFor="country">Country / Region</Label>
@@ -223,14 +223,14 @@ export default function Shipping({ setStep, setdata, data }) {
       </div>
 
       {/* Footer actions */}
-      <div className="w-full flex items-center justify-between pt-5">
-        <div className="flex items-center gap-2 text-[#5c2707] cursor-pointer" onClick={()=> router.push('/cart')}>
+      <div className="w-full flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-5">
+        <div className="flex items-center justify-center sm:justify-start gap-2 text-[#5c2707] cursor-pointer text-sm" onClick={()=> router.push('/cart')}>
           <ChevronLeft size={16} />
           Return to Cart
         </div>
-        <div>
+        <div className="w-full sm:w-auto">
           <button
-            className="flex items-center gap-2 bg-[#5c2707] text-white font-thin font-montserrat px-6 py-3 rounded-lg cursor-pointer"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#5c2707] text-white font-thin font-montserrat px-6 py-3 rounded-lg cursor-pointer"
             type="submit"
           >
             Continue to Payment

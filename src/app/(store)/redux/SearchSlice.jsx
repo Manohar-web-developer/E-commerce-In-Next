@@ -14,7 +14,7 @@ const getSerchValue = () => {
 
 const initialState = {
   SerchValueItems: getSerchValue(),
-  serchBoxOpen: true,
+  serchBoxOpen: false,
 }
 
 export const SearchSlice = createSlice({
