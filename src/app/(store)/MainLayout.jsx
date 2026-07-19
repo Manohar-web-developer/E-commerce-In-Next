@@ -6,10 +6,12 @@ import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import CartSlide from './components/CartSlide';
 import WishListPopup from './components/WishListPopup';
+import SearchPopup from './search/SearchPopup';
 function MainLayout({ children }) {
   return (
     <>
       <Provider store={store}>
+        <SearchPopup/>
         <WishListPopup />
         <CartSlide />
         <Header />

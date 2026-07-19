@@ -9,20 +9,18 @@ import Review from './components/Review'
 import OrderSummary from './components/OrderSummary'
 import CheckoutSteps from './components/CheckoutSteps'
 import OrderConfirmation from './components/OrderConfirmation'
-// import { clearCart } from '@/app/(store)/redux/cartSlice'   
 
 function MainLayout() {
-  const order = useSelector((state) => state.orderData.orderItmes)
   const [step, setStep] = useState(1)
   const [data, setdata] = useState({})
   const dispatch = useDispatch()
   const router = useRouter()
 
   const resetOrder = () => {
-    dispatch(clearCart())     // redux cart empty
-    setdata({})                // local form data reset
-    setStep(1)                  // wapas step 1
-    router.push('/')            // home/shop pe bhej do
+    dispatch(clearCart())     
+    setdata({})                
+    setStep(1)                 
+    router.push('/')            
   }
 
   return (
@@ -34,7 +32,6 @@ function MainLayout() {
           {step == 2 && <Shipping setStep={setStep} setdata={setdata} data={data} />}
           {step == 3 && <Payment setStep={setStep} setdata={setdata} data={data} />}
           {step == 4 && <Review setStep={setStep} data={data} />}
-          {step == 5 && <OrderConfirmation resetOrder={resetOrder} />}
         </section>
         {step <= 4 && (
           <aside>
@@ -42,6 +39,7 @@ function MainLayout() {
           </aside>
         )}
       </main>
+        {step == 5 && <OrderConfirmation />}
     </>
   )
 }

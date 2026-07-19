@@ -10,6 +10,7 @@ import Image from 'next/image'
 import { useDispatch } from 'react-redux'
 import { toggleCartSideBar } from '../../redux/Cartslice'
 import { togglePopup } from '../../redux/WishList'
+import { serchBoxPopup } from '../../redux/SearchSlice'
 
 // Mobile Menu Component
 function MobileMenu() {
@@ -227,9 +228,8 @@ function Header() {
               <Link href={"/account"} className='hidden sm:block hover:opacity-70 transition text-white'>
                 <User size={18} className='sm:w-5 sm:h-5' />
               </Link>
-              <Link href={"/search"} className='hidden sm:block hover:opacity-70 transition text-white'>
-                <Search size={18} className='sm:w-5 sm:h-5' />
-              </Link>
+                <Search size={18} className='sm:w-5 sm:h-5 hidden sm:block hover:opacity-70 transition text-white cursor-pointer' onClick={() => dispatch(serchBoxPopup())} />
+              
               
                 <ShoppingCart onClick={() => dispatch(toggleCartSideBar())} size={18} className='sm:w-5 sm:h-5 hidden sm:block hover:opacity-70 transition text-white cursor-pointer' />
              

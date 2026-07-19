@@ -11,7 +11,7 @@ export const metadata = {
   description: "Shop ready-to-ship modern furniture, premium lighting, and home decor accents online. ✓ 40+ years craftsmanship ✓ COD ✓ Fast &amp; Free Delivery",
 };
 export default async function page() {
-  const poufsData = poufUpSpace()
+  const poufsData = await poufUpSpace()
   return (
     <div><Home poufsData = {poufsData}/></div>
   )

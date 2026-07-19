@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Truck, CheckCircle2 } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
-function OrderConfirmation({ resetOrder }) {
+function OrderConfirmation() {
   const [showThankYou, setShowThankYou] = useState(false)
-
+  const route = useRouter()
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowThankYou(true)
@@ -13,7 +14,7 @@ function OrderConfirmation({ resetOrder }) {
 
   if (!showThankYou) {
     return (
-      <div className="w-full max-w-3xl mx-auto flex flex-col items-center justify-center py-24">
+      <div className="w-full mx-auto flex flex-col items-center justify-center py-24">
         <div className="relative w-full max-w-md h-24 overflow-hidden">
           <Truck 
             size={48} 
@@ -33,7 +34,7 @@ function OrderConfirmation({ resetOrder }) {
   }
 
   return (
-    <div className="w-full max-w-3xl mx-auto flex flex-col items-center justify-center py-20 text-center rounded-lg border p-6">
+    <div className="w-full max-w-5xl mx-auto flex flex-col items-center justify-center py-20 text-center rounded-lg border p-6">
       <CheckCircle2 size={64} className="text-green-600 mb-4" />
       <h2 className="text-2xl font-bold text-[#5c2707]">Thank You for Your Order!</h2>
       <p className="text-gray-500 mt-2 font-montserrat">
@@ -41,7 +42,7 @@ function OrderConfirmation({ resetOrder }) {
       </p>
       <button
         className="mt-8 bg-[#5c2707] text-white font-montserrat px-6 py-3 rounded-lg cursor-pointer"
-        onClick={resetOrder}
+        onClick={() => route.push('/shop/all')}
       >
         Continue Shopping
       </button>
