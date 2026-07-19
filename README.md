@@ -1,36 +1,186 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🛋️ Modern Furniture E-Commerce Website
 
-## Getting Started
+A modern, responsive Furniture E-Commerce website built with **Next.js**, **React**, **Redux Toolkit**, and **Tailwind CSS**.
 
-First, run the development server:
+This project is inspired by real-world e-commerce platforms and was built to improve my frontend development skills by working with modern technologies and scalable architecture.
+
+---
+
+## 🚀 Live Demo
+
+🌐 https://e-commerce-in-next.vercel.app/
+
+---
+
+## ✨ Features
+
+- 🏠 Modern & Responsive Home Page
+- 📂 Collection & Category Pages
+- 📦 Product Details Page
+- 🔍 Smart Search Popup
+- ❤️ Wishlist
+- 🛒 Shopping Cart
+- 💳 Checkout Page
+- 🍪 Cookie-based Cart Persistence
+- ⚡ Redux Toolkit State Management
+- 📱 Fully Responsive Design
+- 🎨 Beautiful UI with Tailwind CSS
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Usage |
+|------------|-------|
+| Next.js | App Router |
+| React.js | Frontend |
+| Tailwind CSS | Styling |
+| Redux Toolkit | State Management |
+| Axios | API Requests |
+| Shopify Product API | Product Data |
+| Lucide React | Icons |
+| Vercel | Deployment |
+
+---
+
+# 📸 Project Screenshots
+
+## 🏠 Home Page
+
+![Home Page](./src/app/screenshots/home-page.png)
+
+---
+
+## 📂 Collection Page
+
+![Collection Page](./src/app/screenshots/collection-page.png)
+
+---
+
+## 📦 Product Details
+
+![Product Details](./src/app/screenshots/details-page.png)
+
+---
+
+## 🛒 Shopping Cart
+
+![Cart](./src/app/screenshots/cart.png)
+
+---
+
+## 💳 Checkout
+
+![Checkout](./src/app/screenshots/checkout.png)
+
+---
+
+## 📱 Mobile Responsive
+
+![Mobile](./src/app/screenshots/mobile.webp)
+
+---
+
+# 📂 Folder Structure
+
+```text
+src
+│
+├── app
+├── components
+├── redux
+├── lib
+├── asset
+├── screenshots
+│
+public
+```
+
+---
+
+# ⚙️ Getting Started
+
+Clone the repository
+
+```bash
+git clone https://github.com/Manohar-web-developer/E-commerce-In-Next.git
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open your browser
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+# 📚 What I Learned
 
-To learn more about Next.js, take a look at the following resources:
+During this project I improved my understanding of:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Next.js App Router
+- React Component Architecture
+- Redux Toolkit
+- Cookie Management
+- API Integration
+- Dynamic Routing
+- Responsive UI Development
+- Reusable Components
+- State Management
+- Deploying Applications on Vercel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+# 🚀 Future Improvements
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is still under active development.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Upcoming improvements include:
+
+- 🔐 User Authentication
+- 💳 Payment Gateway
+- 📦 Order Management
+- ⭐ Product Reviews
+- 🚀 Better Search Experience
+- ⚡ Performance Optimization
+- 🎯 SEO Optimization
+- 📊 Admin Dashboard
+- ❤️ Recently Viewed Products
+- 🎨 UI/UX Improvements
+
+I will continue improving this project by adding new features, refining the user experience, optimizing performance, and applying everything I learn throughout my frontend development journey.
+
+---
+
+# 🤝 Feedback
+
+Your feedback and suggestions are always welcome.
+
+If you find something that can be improved, feel free to create an issue or connect with me on LinkedIn.
+
+---
+
+# 👨‍💻 Author
+
+**Manohar Choudhary**
+
+- GitHub: https://github.com/Manohar-web-developer
+- LinkedIn: https://www.linkedin.com/in/manohar-choudhary-developer/
+
+---
+
+## ⭐ If you like this project, don't forget to give it a Star!
+
+Thank you for visiting my repository. ❤️
